@@ -1,55 +1,141 @@
 package io.github.jeyhung.mathematics;
 
+import java.awt.*;
+import java.util.Objects;
+
 public final class Mathematics {
-    /**
-     * Don't let anyone instantiate this class.
-     */
     private Mathematics() {
     }
 
-    /**
-     * The {@code double} value that is closer than any other to
-     * <i>e</i>, the base of the natural logarithms.
-     */
-    public static final double E = 2.7182818284590452354;
+    static class Triangle {
+        public static boolean isTriangle(double side1, double side2, double side3) {
+            if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
+                throw new RuntimeException("Triangle side must be positive!");
+            }
 
-    /**
-     * The {@code double} value that is closer than any other to
-     * <i>pi</i>, the ratio of the circumference of a circle to its
-     * diameter.
-     */
-    public static final double PI = 3.14159265358979323846;
+            if (side1 < side2 + side3 && side2 < side1 + side3 && side3 < side1 + side2) {
+                return true;
+            }
 
-    /**
-     * Constant by which to multiply an angular value in degrees to obtain an
-     * angular value in radians.
-     */
-    private static final double DEGREES_TO_RADIANS = 0.017453292519943295;
+            return false;
+        }
 
-    /**
-     * Constant by which to multiply an angular value in radians to obtain an
-     * angular value in degrees.
-     */
-    private static final double RADIANS_TO_DEGREES = 57.29577951308232;
+        public static boolean isTriangle(Point point1, Point point2, Point point3) {
+            requirePoints(point1, point2, point3);
 
-    /**
-     * Returns the smaller of three {@code int} values. That is,
-     * the result the argument closer to the value of
-     * {@link Integer#MIN_VALUE}.  If the arguments have the same
-     * value, the result is that same value.
-     *
-     * @param a an argument.
-     * @param b another argument.
-     * @param c another argument.
-     * @return the smaller of {@code a} and {@code b} and {@code c}.
-     */
-    public static int min(int a, int b, int c) {
-        if (a <= b && a <= c) {
-            return a;
-        } else if (b <= a && b <= c) {
-            return b;
-        } else {
-            return c;
+            double side1 = Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+            double side2 = Math.sqrt(Math.pow(point2.x - point3.x, 2) + Math.pow(point2.y - point3.y, 2));
+            double side3 = Math.sqrt(Math.pow(point3.x - point1.x, 2) + Math.pow(point3.y - point1.y, 2));
+
+            return isTriangle(side1, side2, side3);
+        }
+
+        public static boolean isEquilateralTriangle(double side1, double side2, double side3) {
+            isTriangle(side1, side2, side3);
+
+            if (side1 == side2 && side2 == side3) {
+                return true;
+            }
+            return false;
+        }
+
+        public static boolean isEquilateralTriangle(Point point1, Point point2, Point point3) {
+            requirePoints(point1, point2, point3);
+
+            double side1 = Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+            double side2 = Math.sqrt(Math.pow(point2.x - point3.x, 2) + Math.pow(point2.y - point3.y, 2));
+            double side3 = Math.sqrt(Math.pow(point3.x - point1.x, 2) + Math.pow(point3.y - point1.y, 2));
+
+            return isEquilateralTriangle(side1, side2, side3);
+        }
+
+        public static boolean isIsoscelesTriangle(double side1, double side2, double side3) {
+            isTriangle(side1, side2, side3);
+
+            if (side1 == side2 || side2 == side3 || side1 == side3) {
+                return true;
+            }
+            return false;
+        }
+
+        public static boolean isIsoscelesTriangle(Point point1, Point point2, Point point3) {
+            requirePoints(point1, point2, point3);
+
+            double side1 = Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+            double side2 = Math.sqrt(Math.pow(point2.x - point3.x, 2) + Math.pow(point2.y - point3.y, 2));
+            double side3 = Math.sqrt(Math.pow(point3.x - point1.x, 2) + Math.pow(point3.y - point1.y, 2));
+
+            return isIsoscelesTriangle(side1, side2, side3);
+        }
+
+        public static boolean isScaleneTriangle(double side1, double side2, double side3) {
+            isTriangle(side1, side2, side3);
+
+            if (side1 != side2 && side2 != side3 && side1 != side3) {
+                return true;
+            }
+            return false;
+        }
+
+        public static boolean isScaleneTriangle(Point point1, Point point2, Point point3) {
+            requirePoints(point1, point2, point3);
+
+            double side1 = Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+            double side2 = Math.sqrt(Math.pow(point2.x - point3.x, 2) + Math.pow(point2.y - point3.y, 2));
+            double side3 = Math.sqrt(Math.pow(point3.x - point1.x, 2) + Math.pow(point3.y - point1.y, 2));
+
+            return isScaleneTriangle(side1, side2, side3);
+        }
+
+        public static double perimeter(double side1, double side2, double side3) {
+            isTriangle(side1, side2, side3);
+            return side1 + side2 + side3;
+        }
+
+        public static double perimeter(Point point1, Point point2, Point point3) {
+            requirePoints(point1, point2, point3);
+
+            double side1 = Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+            double side2 = Math.sqrt(Math.pow(point2.x - point3.x, 2) + Math.pow(point2.y - point3.y, 2));
+            double side3 = Math.sqrt(Math.pow(point3.x - point1.x, 2) + Math.pow(point3.y - point1.y, 2));
+
+            return perimeter(side1, side2, side3);
+        }
+
+        public static double area(double side1, double side2, double side3) {
+            isTriangle(side1, side2, side3);
+            double perimeter = perimeter(side1, side2, side3) / 2;
+            return Math.sqrt(perimeter * (perimeter - side1) * (perimeter - side2) * (perimeter - side3));
+        }
+
+        public static double area(Point point1, Point point2, Point point3) {
+            requirePoints(point1, point2, point3);
+
+            double side1 = Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+            double side2 = Math.sqrt(Math.pow(point2.x - point3.x, 2) + Math.pow(point2.y - point3.y, 2));
+            double side3 = Math.sqrt(Math.pow(point3.x - point1.x, 2) + Math.pow(point3.y - point1.y, 2));
+
+            return area(side1, side2, side3);
+        }
+
+        public static double area(double base, double height) {
+            if (base <= 0) {
+                throw new RuntimeException("Triangle base must be positive!");
+            }
+
+            if (height <= 0) {
+                throw new RuntimeException("Triangle height must be positive!");
+            }
+
+            return (base * height) / 2;
+        }
+
+        private static void requirePoints(Point point1, Point point2, Point point3) {
+            Objects.requireNonNull(point1);
+            Objects.requireNonNull(point2);
+            Objects.requireNonNull(point3);
         }
     }
 }
+
+

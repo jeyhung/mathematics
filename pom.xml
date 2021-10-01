@@ -5,9 +5,10 @@
 
     <groupId>io.github.jeyhung</groupId>
     <artifactId>mathematics</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2</version>
     <name>mathematics</name>
     <description>mathematics</description>
+    <url>https://github.com/jeyhung/mathematics</url>
 
     <properties>
         <java.version>11</java.version>
@@ -38,6 +39,8 @@
         <developer>
             <name>Jeyhun Gasimov</name>
             <email>jeyhun.gasimov.1@gmail.com</email>
+            <organization>ERAY</organization>
+            <organizationUrl>eray.az</organizationUrl>
         </developer>
     </developers>
 
@@ -47,37 +50,14 @@
         <url>https://github.com/jeyhung/mathematics</url>
     </scm>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>3.12.4</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>9</source>
-                    <target>9</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
 
